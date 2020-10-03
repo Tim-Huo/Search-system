@@ -13,7 +13,7 @@
     <result column="telphone" jdbcType="VARCHAR" property="telphone" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
-    <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="gender"  jdbcType="INTEGER" property="gender" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
@@ -154,4 +154,11 @@
       gender = #{gender,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByTelphoneAndPassword" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from user where telphone=#{telphone} and password = #{password}
+  </select>
+
 </mapper>
