@@ -1,10 +1,10 @@
-package com.timhuo.dianping.controller;
+package com.timhuo.dianping.controller.admin;
 
-import com.timhuo.dianping.common.AdminPermission;
-import com.timhuo.dianping.common.BusinessException;
-import com.timhuo.dianping.common.CommonUtil;
-import com.timhuo.dianping.common.EmBusinessError;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.timhuo.dianping.common.*;
 import com.timhuo.dianping.model.SellerModel;
+import com.timhuo.dianping.request.PageQuery;
 import com.timhuo.dianping.request.SellerCreateReq;
 import com.timhuo.dianping.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +37,14 @@ public class SellerController {
      */
     @GetMapping("/index")
     @AdminPermission
-    public ModelAndView index(){
+    public ModelAndView index(PageQuery pageQuery){
+
+        PageHelper.startPage(pageQuery.getPage(), pageQuery.getSize());
         List<SellerModel> sellerModelList = sellerService.selectAll();
-        ModelAndView modelAndView = new ModelAndView("/admin/seller/index.html");
-        modelAndView.addObject("data",sellerModelList);
+        PageInfo<SellerModel> sellerModelPageInfo = new PageInfo<>(sellerModelList);
+
+        ModelAndView modelAndView = new ModelAndView( "/admin/seller/index.html");
+        modelAndView.addObject("data",sellerModelPageInfo);
         modelAndView.addObject("CONTROLLER_NAME","seller");
         modelAndView.addObject("ACTION_NAME","index");
         return modelAndView;
@@ -85,6 +89,34 @@ public class SellerController {
         return "redirect:/admin/seller/index";
     }
 
+    /**
+     * 禁用
+     *
+     * @auther: Tim_Huo
+     * @param: id
+     * @return: CommonRes
+     * @date: 2020/10/4 10:22 上午
+     */
+    @PostMapping("/down")
+    @AdminPermission
+    public CommonRes down(@RequestParam(value="id")Integer id) throws BusinessException {
+        SellerModel sellerModel = sellerService.changeStatus(id,1);
+        return CommonRes.create(sellerModel);
+    }
 
+    /**
+     * 启用
+     *
+     * @auther: Tim_Huo
+     * @param: id
+     * @return: CommonRes
+     * @date: 2020/10/4 10:22 上午
+     */
+    @PostMapping("/up")
+    @AdminPermission
+    public CommonRes up(@RequestParam(value="id")Integer id) throws BusinessException {
+        SellerModel sellerModel = sellerService.changeStatus(id,0);
+        return CommonRes.create(sellerModel);
+    }
 
 }

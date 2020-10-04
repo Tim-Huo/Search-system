@@ -48,5 +48,12 @@ public interface SellerService {
      */
     SellerModel changeStatus(Integer id, Integer disabledFlag) throws BusinessException;
 
+    /**
+     * 计算所有的商家
+     *
+     * @auther: Tim_Huo
+     * @return: Integer
+     * @date: 2020/10/4 2:33 下午
+     */
     Integer countAllSeller();
 }
