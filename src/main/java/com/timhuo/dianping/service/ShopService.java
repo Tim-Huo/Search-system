@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-public interface ShopService {
+public interface  ShopService {
 
     /**
      * 创建门店
@@ -40,9 +40,27 @@ public interface ShopService {
      */
     List<ShopModel> selectAll();
 
-
+    /**
+     * 根据经纬度查询门店列表
+     *
+     * @auther: Tim_Huo
+     * @param: longitude 经度
+     * @param: latitude 纬度
+     * @return: 
+     * @date: 2020/10/4 2:58 下午
+     */
     List<ShopModel> recommend(BigDecimal longitude, BigDecimal latitude);
 
+    /**
+     * 根据标签查询
+     *
+     * @auther: Tim_Huo
+     * @param: keyword
+     * @param: categoryId
+     * @param: tags
+     * @return: List
+     * @date: 2020/10/4 5:30 下午
+     */
     List<Map<String,Object>> searchGroupByTags(String keyword, Integer categoryId, String tags);
 
     /**

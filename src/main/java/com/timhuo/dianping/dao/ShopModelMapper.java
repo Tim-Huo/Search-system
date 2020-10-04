@@ -1,8 +1,11 @@
 package com.timhuo.dianping.dao;
 
 import com.timhuo.dianping.model.ShopModel;
+import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public interface ShopModelMapper {
     /**
@@ -56,5 +59,12 @@ public interface ShopModelMapper {
     List<ShopModel> selectAll();
 
     Integer countAllShop();
+
+    List<ShopModel> recommend(@Param("longitude") BigDecimal longitude,
+                              @Param("latitude") BigDecimal latitude);
+
+    List<Map<String,Object>> searchGroupByTags(@Param("keyword") String keyword,
+                                               @Param("categoryId") Integer categoryId,
+                                               @Param("tags") String tags);
 
 }
