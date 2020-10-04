@@ -45,6 +45,13 @@ public interface ShopService {
 
     List<Map<String,Object>> searchGroupByTags(String keyword, Integer categoryId, String tags);
 
+    /**
+     * 计算所有的门店
+     *
+     * @auther: Tim_Huo
+     * @return: Integer
+     * @date: 2020/10/4 2:44 下午
+     */
     Integer countAllShop();
 
     List<ShopModel> search(BigDecimal longitude,

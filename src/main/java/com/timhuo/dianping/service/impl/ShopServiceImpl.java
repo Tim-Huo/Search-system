@@ -95,7 +95,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public Integer countAllShop() {
-        return null;
+        return shopModelMapper.countAllShop();
     }
 
     @Override
