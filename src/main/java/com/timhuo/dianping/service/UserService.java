@@ -2,7 +2,6 @@ package com.timhuo.dianping.service;
 
 import com.timhuo.dianping.common.BusinessException;
 import com.timhuo.dianping.model.UserModel;
-import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -32,5 +31,12 @@ public interface UserService {
      */
     UserModel login(String telphone, String password) throws UnsupportedEncodingException, NoSuchAlgorithmException, BusinessException;
 
-
+    /**
+     * 注册用户数量
+     *
+     * @auther: Tim_Huo
+     * @return: Integer
+     * @date: 2020/10/4 8:55 上午
+     */
+    Integer countAllUser();
 }

@@ -56,4 +56,6 @@ public interface UserModelMapper {
 
     UserModel selectByTelphoneAndPassword(@Param("telphone") String telphone, @Param("password") String password);
 
+    Integer countAllUser();
+
 }

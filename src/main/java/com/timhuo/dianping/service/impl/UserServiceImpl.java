@@ -44,6 +44,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Integer countAllUser() {
+        return userModelMapper.countAllUser();
+    }
+
+    @Override
     @Transactional
     public UserModel register(UserModel userModel) throws BusinessException, UnsupportedEncodingException, NoSuchAlgorithmException {
         userModel.setPassword(encodeByMd5(userModel.getPassword()));
@@ -64,7 +69,6 @@ public class UserServiceImpl implements UserService {
         BASE64Encoder base64Encoder = new BASE64Encoder();
         return base64Encoder.encode(messageDigest.digest(str.getBytes("utf-8")));
     }
-
 
 
 }
